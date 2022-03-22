@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %}
+
+{% block js %}
+<script>
+    function eliminarProveedores(id) {
+        Swal.fire({
+            "title":"¿Estas seguro?",
+            "text":"esto no se puede deshacer",
+            "icon":"question",
+            "showCancelButton":true,
+            "cancelButtonText":"No, Cancelar",
+            "confirmButtonText":"Si, Eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"#dc3545"
+        })
+    }
+</script>
+{% endblock %}
+
+{% block contenido %}
+
+<br><br>
+<div class="card">
+    <div class="card-body">
+        <h2 align='center'>Listado Proveedores</h2>
+        <hr>
+        <table class="table table-striped table-hover table-responsive-sm">
+            <tr>
+                <th>Nombre_completo</th>
+                <th>Rut</th>
+                <th>Direccion</th>
+                <th>Comuna</th>
+                <th>Telefono</th>
+                <th>Marca</th>
+                <th>Opciones</th>
+            </tr>
+            {% for p in proveedores %}
+            <tr>
+                <td>{{ p.nombre_completo }}</td>
+                <td>{{ p.rut }}</td>
+                <td>{{ p.direccion }}</td>
+                <td>{{ p.comuna }}</td>
+                <td>{{ p.telefono }}</td>
+                <td>{{ p.marca }}</td>
+                <td>
+                    <a href="{% url 'modificar_proveedores' p.id %}" class="btn btn-info btn-sm">modificar</a>
+                    <a href="#" onclick="eliminarProveedores({{ p.id }})" class="btn btn-danger btn-sm">eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+    </div>
+</div>
+
+{% endblock %}

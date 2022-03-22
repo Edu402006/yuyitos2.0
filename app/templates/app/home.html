@@ -1,0 +1,109 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('.slider').bxSlider({
+          mode: 'fade',//horizontal, vertical, fade
+          auto: true,
+          pause: 2000
+      });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="slider">
+    <div>
+        <img src="{% static 'app/img/banner/banner_1.jpg' %}" alt="">
+    </div>
+    <div>
+        <img src="{% static 'app/img/banner/banner_2.jpg' %}" alt="">
+    </div>
+    <div>
+        <img src="{% static 'app/img/banner/banner_3.jpg' %}" alt="">
+    </div>
+</div>
+
+<tr>
+    <td colspan="3">
+        <hr>
+    </td>
+</tr>
+<tr width="40%">
+&nbsp;
+</tr>
+<div class="container" align="center">    
+    {% csrf_token %}
+    <div class="row">            
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">                                
+            <!-- <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'home' %}">Inicio</a>
+            </div> -->
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'contacto' %}">Contacto</a>
+            </div>
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'galeria' %}">Galería</a>
+            </div>
+            
+            {% if perms.app.add_producto %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'agregar_producto' %}">Nuevo Producto</a>
+            </div>
+            {% endif %}
+            
+            {% if perms.app.view_producto %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'listar_productos' %}">Listado Producto</a>
+            </div>
+            {% endif %}
+            
+            {% if perms.app.add_proveedores %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'agregar_proveedores' %}">Nuevo Proveedor</a>
+            </div>
+            {% endif %}
+
+            {% if perms.app.view_proveedores %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'listar_proveedores' %}">Listado Proveedores</a>
+            </div>
+            {% endif %}
+
+            {% if perms.app.add_clientes %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'agregar_cliente' %}">Nuevo Cliente</a>
+            </div>
+            {% endif %}
+
+            {% if perms.app.view_cliente %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'listar_cliente' %}">Listado de Clientes</a>
+            </div>            
+            {% endif %}
+            <div class="col-md-12">
+                <a class="btn btn-secondary text-white btn-lg btn-block w-100 mb-3" href="{% url 'listar_contacto' %}">Mostrar Contactos</a>
+            </div>                        
+        </div>
+        <hr>
+        {% if user.is_authenticated %}
+            
+        {% else %}
+            
+        {% endif %}
+        <div class="col-md-4">
+        </div>           
+    </div>
+</div>
+{% endblock %}

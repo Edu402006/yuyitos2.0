@@ -1,0 +1,50 @@
+{% extends 'app/base.html' %}
+
+{% block js %}
+<script>
+    function eliminarContacto(id) {
+        Swal.fire({
+            "title":"¿Estas seguro?",
+            "text":"esto no se puede deshacer",
+            "icon":"question",
+            "showCancelButton":true,
+            "cancelButtonText":"No, Cancelar",
+            "confirmButtonText":"Si, Eliminar",
+            "reverseButtons":true,
+            "confirmButtonColor":"#dc3545"
+        })
+    }
+</script>
+{% endblock %}
+
+{% block contenido %}
+<br><br>
+<div class="card">
+    <div class="card-body">
+        <h2 align='center'>Listado de Contactos</h2>
+        <hr>
+        <table class="table table-striped table-hover table-responsive-sm">
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Tipo_consulta</th>
+                <th>Mensaje</th>
+                <th>Opciones</th>
+            </tr>
+            {% for c in contacto %}
+            <tr>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.correo }}</td>
+                <td>{{ c.tipo_consulta }}</td>
+                <td>{{ c.mensaje }}</td>
+                <td>
+                    <a href="{% url 'modificar_contacto' c.id %}" class="btn btn-info btn-sm">modificar</a>
+                    <a href="#" onclick="eliminarContacto({{ c.id }})" class="btn btn-danger btn-sm">eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr>
+    </div>
+</div>
+{% endblock %}
